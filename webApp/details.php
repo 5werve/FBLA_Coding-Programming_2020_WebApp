@@ -58,6 +58,15 @@
 			fwrite($handle, date("h:i:sa") . " PST: " . ucfirst($auth_level) . " " . $name . " has been deleted." . "\n");
 			fclose($handle);
 
+			$target = "C:/xampp/htdocs/FBLA_Coding-Programming_2020_WebApp-optimize_041220/webApp/uploads/$idToDelete/";
+			$imageFiles = glob($target . '*', GLOB_MARK);
+
+			foreach($imageFiles as $imageFile) {
+				unlink($imageFile);
+			}
+
+			rmdir($target);
+
 			mysqli_free_result($result);
 			mysqli_close($conn);
 

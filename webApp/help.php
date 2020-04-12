@@ -13,6 +13,7 @@
       <h5>Common Questions</h5>
       <ul>
         <li><a href="#login">How to login</a></li>
+        <li><a href="#forgotPwd">How to reset forgotten password</a></li>
         <li><a href="#logout">How to logout</a></li>
         <li><a href="#addMember">How to add a member</a></li>
         <li><a href="#addAdvisor">How to add an advisor</a></li>
@@ -31,6 +32,18 @@
           Click on the login button in the navigation bar or in the dropdown menu for smaller screens. Enter
           your credentials and hit the submit button. You should be redirected to the homepage if the login
           was a success. Your name should now be displayed in the navigation bar or within the dropdown menu.
+        </p>
+      </div>
+      <hr>
+      <div id="forgotPwd">
+        <h5 class="brand-text">How to reset forgotten password</h5>
+        <p>
+          Click on the login button in the navigation bar or in the dropdown menu. Locate the
+          "Forgot your password?" button above the submit button and click on it. Enter the email of your
+          account and click the "send recovery email" button. After you see the success dialogue under the
+          button, check your inbox for the recovery email (it may be in your junk/spam folder). Click on the
+          recovery url in the email. Once you reach the "create new password" page, create your new password
+          and click the reset button.
         </p>
       </div>
       <hr>

@@ -67,7 +67,7 @@
     <label>Your Password</label>
     <input type="password" name="password">
     <div class="red-text"><?php echo $errors['password']; ?></div>
-    <a href="reset-password.php">Forgot your password?</a>
+    <a href="resetPassword.php">Forgot your password?</a>
     <div class="center">
       <input type="submit" name="login-submit" value="Submit" class="btn brand z-depth-0">
     </div>
