@@ -1,14 +1,16 @@
 Title: Centennial FBLA Database
 Author: Matthew Vu
 Date: 3/7/2020
-Version: 1.0.0
+Version: 1.0.1
 
 Description: This program manages a database storing information for all the members of the Centennial
 FBLA chapter. This information includes the name, grade, email, student id, total service hours,
 service award category, and profile picture. Users can create members, update values, and delete members.
 The program also sends out weekly service reports for each individual member and the advisor.
 
-Bugs: Does not delete profile image after a member is deleted
+Update Notes: fixed bug where images were not deleted after the user was deleted. Added relevant information to the help page.
+
+Bugs: performance issues
 
 Program Citation:
 
