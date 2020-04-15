@@ -1,3 +1,8 @@
+:root {
+  --brand-blue-color: #2d5fad;
+  --brand-red-color: #ad2d2d;
+}
+
 :target:before {
   content: "";
   display: block;
@@ -10,11 +15,11 @@
 }
 
 .brand {
-  background: #2d5fad !important;
+  background: var(--brand-blue-color) !important;
 }
 
 .brand-text {
-  color: #ad2d2d !important;
+  color: var(--brand-red-color) !important;
 }
 
 .content {
@@ -26,7 +31,7 @@
 }
 
 .field {
-  background-color: #ad2d2d !important;
+  background-color: var(--brand-red-color) !important;
 }
 
 .wrapper {
@@ -70,7 +75,7 @@ footer {
 
 #logo-text {
   display: none;
-  color: #ad2d2d;
+  color: var(--brand-red-color);
   position: relative;
   left: 20px;
 }

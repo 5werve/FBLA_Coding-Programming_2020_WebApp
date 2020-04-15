@@ -1,7 +1,6 @@
 <?php
 
-  // Add connection to database
-  include('config/db_connect.php');
+  include('config/dbConnect.php');
 
   $email = $password = '';
   $errors = array('email' => '', 'password' => '');
@@ -37,9 +36,9 @@
             // If password is correct, redirect user to the homepage
             if($pwdCheck) {
               session_start();
-              $_SESSION['login_status'] = true;
+              $_SESSION['loginStatus'] = true;
               $_SESSION['id'] = $row['id'];
-              $_SESSION['auth_level'] = $row['auth_level'];
+              $_SESSION['authLevel'] = $row['auth_level'];
               $_SESSION['name'] = $row['name'];
 
               header('Location: index.php');

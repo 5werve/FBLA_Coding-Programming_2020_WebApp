@@ -1,9 +1,3 @@
-<?php
-
-
-
-?>
-
 <?php include('templates/header.php'); ?>
 
   <section class="container content">

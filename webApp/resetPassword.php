@@ -1,28 +1,8 @@
 <?php
 
-  // Add connection to database
-  include('config/db_connect.php');
+  include('config/dbConnect.php');
 
-  // Configuration for PHPMailer
-  require 'phpMailer/includes/PHPMailer.php';
-  require 'phpMailer/includes/Exception.php';
-  require 'phpMailer/includes/SMTP.php';
-
-  use PHPMailer\PHPMailer\PHPMailer;
-  use PHPMailer\PHPMailer\Exception;
-  use PHPMailer\PHPMailer\SMTP;
-
-  // Initializing PHPMailer object
-  $mail = new PHPMailer();
-
-  $mail->isSMTP();
-  $mail->Host = 'smtp.gmail.com';
-  $mail->SMTPAuth = 'true';
-  $mail->SMTPSecure = 'tls';
-  $mail->Port = '587';
-  $mail->Username = 'fbla.candp.centennial@gmail.com';
-  $mail->Password = 'Minhhongan';
-  $mail->isHTML(true);
+  include('config/emailObjectInit.php');
 
   $errorEmail = '';
 

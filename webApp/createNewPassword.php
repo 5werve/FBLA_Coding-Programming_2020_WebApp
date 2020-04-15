@@ -1,10 +1,9 @@
 <?php
 
-  // Add connection to database
-  include('config/db_connect.php');
+  include('config/dbConnect.php');
 
-  $password = $password_reenter = $selector = $validator = '';
-  $errors = array('password' => '', 'password_reenter' => '', 'selector' => '', 'validator' => '');
+  $password = $passwordReenter = $selector = $validator = '';
+  $errors = array('password' => '', 'passwordReenter' => '', 'selector' => '', 'validator' => '');
 
   if(isset($_POST['submit'])) {
 
@@ -21,13 +20,13 @@
 			}
 		}
 
-		$_POST['password_reenter'] = trim($_POST['password_reenter']);
-		if(empty($_POST['password_reenter'])) {
-			$errors['password_reenter'] = 'You must re-enter your password';
+		$_POST['passwordReenter'] = trim($_POST['passwordReenter']);
+		if(empty($_POST['passwordReenter'])) {
+			$errors['passwordReenter'] = 'You must re-enter your password';
 		} else {
-			$password_reenter = $_POST['password_reenter'];
-			if($password_reenter !== $password) {
-				$errors['password_reenter'] = 'The passwords you entered must match';
+			$passwordReenter = $_POST['passwordReenter'];
+			if($passwordReenter !== $password) {
+				$errors['passwordReenter'] = 'The passwords you entered must match';
 			}
 		}
 
@@ -110,7 +109,7 @@
         }
       }
     } else {
-      $redirectError = 'http://localhost/FBLA_Coding-Programming_2020_WebApp-optimize_041220/webApp/createNewPassword.php?selector=' . $selector . '&validator=' . $validator . '&pwderr=' . $errors['password'] . '&pwdreerr=' . $errors['password_reenter'] . '&selerr=' . $errors['selector'] . '&valerr=' . $errors['validator'];
+      $redirectError = 'http://localhost/FBLA_Coding-Programming_2020_WebApp-optimize_041220/webApp/createNewPassword.php?selector=' . $selector . '&validator=' . $validator . '&pwderr=' . $errors['password'] . '&pwdreerr=' . $errors['passwordReenter'] . '&selerr=' . $errors['selector'] . '&valerr=' . $errors['validator'];
       header("Location: $redirectError");
     }
   }
@@ -153,7 +152,7 @@
           <label>New Password</label>
           <input type="password" name="password" placeholder="New Password">
           <div class="red-text"><?php echo $passwordError ?? ''; ?></div>
-      		<input type="password" name="password_reenter" placeholder="Re-enter New Password">
+      		<input type="password" name="passwordReenter" placeholder="Re-enter New Password">
       		<div class="red-text"><?php echo $passwordReenterError ?? ''; ?></div>
       		<div class="center">
       			<input type="submit" name="submit" value="Reset password" class="btn brand z-depth-0">

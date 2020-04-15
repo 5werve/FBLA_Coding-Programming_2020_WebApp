@@ -1,7 +1,6 @@
 <?php
 
-	// Add connection to database
-	include('config/db_connect.php');
+	include('config/dbConnect.php');
 
 	// Check GET request id param
 	if(isset($_GET['id'])){
@@ -42,7 +41,7 @@
 		$sql = "SELECT auth_level, name FROM member_data WHERE id = $idToDelete;";
 		$result = mysqli_query($conn, $sql);
 		$member = mysqli_fetch_assoc($result);
-		$auth_level = $member['auth_level'];
+		$authLevel = $member['auth_level'];
 		$name = $member['name'];
 
 		// Create sql
@@ -55,9 +54,10 @@
 			date_default_timezone_set('America/Los_Angeles');
 			$file = 'logs/deleteMember.txt';
 			$handle = fopen($file, 'a+');
-			fwrite($handle, date("h:i:sa") . " PST: " . ucfirst($auth_level) . " " . $name . " has been deleted." . "\n");
+			fwrite($handle, date("h:i:sa") . " PST: " . ucfirst($authLevel) . " " . $name . " has been deleted." . "\n");
 			fclose($handle);
 
+			// Deleting the user's image folder after they are deleted
 			$target = "C:/xampp/htdocs/FBLA_Coding-Programming_2020_WebApp-optimize_041220/webApp/uploads/$idToDelete/";
 			$imageFiles = glob($target . '*', GLOB_MARK);
 
@@ -91,7 +91,7 @@
 					<h5 style="font-weight: bold;"><?php echo $member['name']; ?></h5>
 					<p><b>Grade:</b> <?php echo $member['grade']; ?></p>
 					<p><b>Email:</b> <?php echo $member['email']; ?></p>
-					<?php if($member['id'] == $user_session_id || $session_auth_level === 'admin' || $session_auth_level === 'advisor'): ?>
+					<?php if($member['id'] == $userSessionId || $sessionAuthLevel === 'admin' || $sessionAuthLevel === 'advisor'): ?>
 						<p><b>Student ID Number:</b> <?php echo $member['number']; ?></p>
 					<?php endif; ?>
 					<p><b>Total Hours:</b> <?php echo $member['hours']; ?></p>
@@ -107,7 +107,7 @@
 
 			<!-- DELETE FORM -->
 			<?php if($member['auth_level'] === 'member'): ?>
-				<?php if($session_auth_level === 'admin' || $session_auth_level === 'advisor'): ?>
+				<?php if($sessionAuthLevel === 'admin' || $sessionAuthLevel === 'advisor'): ?>
 					<form action="details.php" method="POST">
 						<input type="hidden" name="idToDelete" value="<?php echo $member['id']; ?>">
 						<input type="submit" name="delete" value="Delete" class="btn brand z-depth-0">
@@ -116,7 +116,7 @@
 		  <?php endif; ?>
 
 			<?php if($member['auth_level'] === 'admin' || $member['auth_level'] === 'advisor'): ?>
-				<?php if($session_auth_level === 'advisor'): ?>
+				<?php if($sessionAuthLevel === 'advisor' && $member['id'] != $userSessionId): ?>
 					<form action="details.php" method="POST">
 						<input type="hidden" name="idToDelete" value="<?php echo $member['id']; ?>">
 						<input type="submit" name="delete" value="Delete" class="btn brand z-depth-0">
@@ -126,20 +126,20 @@
 
 			<!-- EDIT FORM -->
 			<?php if($member['auth_level'] === 'member'): ?>
-				<?php if($member['id'] == $user_session_id || $session_auth_level === 'admin' || $session_auth_level === 'advisor'): ?>
+				<?php if($member['id'] == $userSessionId || $sessionAuthLevel === 'admin' || $sessionAuthLevel === 'advisor'): ?>
 					<a class="btn brand z-depth-0" href="update.php?id=<?php echo $member['id'] ?>">Update Info</a>
 				<?php endif; ?>
 			<?php endif; ?>
 
 			<?php if($member['auth_level'] === 'admin' || $member['auth_level'] === 'advisor'): ?>
-				<?php if($member['id'] == $user_session_id || $session_auth_level === 'advisor'): ?>
+				<?php if($member['id'] == $userSessionId || $sessionAuthLevel === 'advisor'): ?>
 					<a class="btn brand z-depth-0" href="update.php?id=<?php echo $member['id'] ?>">Update Info</a>
 				<?php endif; ?>
 			<?php endif; ?>
 
 		<!-- Displays message if the member specified by the id doesn't exist -->
 		<?php else: ?>
-			<h5>No such member exists</h5>
+			<h5 class="red-text">No such member exists</h5>
 		<?php endif ?>
 	</div>
 </section>
