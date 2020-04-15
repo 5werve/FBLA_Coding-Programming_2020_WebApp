@@ -23,7 +23,7 @@
       }
     }
   } else {
-      $error = "Member ID not found.";
+      $error = "Member ID not found";
       $uploadOk = 0;
   }
 
@@ -42,37 +42,37 @@
     if($check !== false) {
       $uploadOk = 1;
     } else {
-      $error = "File is not an image.";
+      $error = "File is not an image";
       $uploadOk = 0;
     }
   }
   // Check if file already exists
   if (file_exists($targetFile)) {
-    $error = "Sorry, file already exists.";
+    $error = "File already exists";
     $uploadOk = 0;
   }
   // Check file size
   if ($_FILES["fileToUpload"]["size"] > 500000) {
-    $error = "Sorry, your file is too large.";
+    $error = "Your file is too large";
     $uploadOk = 0;
   }
   // Allow certain file formats
   if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
   && $imageFileType != "gif" ) {
-    $error = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+    $error = "Only JPG, JPEG, PNG & GIF files are allowed";
     $uploadOk = 0;
   }
 
   // Check if $uploadOk is set to 0 by an error
   if ($uploadOk == 0) {
-    $uploadResult = "Sorry, your file was not uploaded.";
+    $uploadResult = "Your file was not uploaded";
     rmdir($targetDir);
   // If everything is ok, try to upload file
   } else {
       if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $targetFile)) {
-        $uploadResult = "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+        $uploadResult = "The file ". basename($_FILES["fileToUpload"]["name"]). " has been uploaded";
       } else {
-        $uploadResult = "Sorry, there was an error uploading your file.";
+        $uploadResult = "There was an error uploading your file";
       }
   }
 

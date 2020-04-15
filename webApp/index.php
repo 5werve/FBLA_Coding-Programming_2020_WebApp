@@ -1,7 +1,6 @@
 <?php
 
-  // Add connection to database
-  include('config/db_connect.php');
+  include('config/dbConnect.php');
 
   // Write query for all members:
   $sql = "SELECT id, name, grade, hours, auth_level, email,
@@ -44,13 +43,13 @@
                 <?php $dir = 'uploads/' . $member['id'] . '/' ?>
                 <?php if(is_dir($dir)): ?>
                   <?php $files = scandir($dir); ?>
-                  <?php $target_file = 'uploads/' . $member['id'] . '/' . $files[2]; ?>
-                  <?php if(file_exists($target_file)): ?>
-                    <?php echo $target_file; ?>
+                  <?php $targetFile = 'uploads/' . $member['id'] . '/' . $files[2]; ?>
+                  <?php if(file_exists($targetFile)): ?>
+                    <?php echo $targetFile; ?>
                   <?php endif; ?>
                 <?php else: // Sets the profile as a default image if it is not set yet ?>
-                  <?php $target_file = 'images/default_profile.jpg'; ?>
-                  <?php echo $target_file; ?>
+                  <?php $targetFile = 'images/default_profile.jpg'; ?>
+                  <?php echo $targetFile; ?>
                 <?php endif; ?>"
                 width=100px height = 150px style="object-fit:cover;;"
               />

@@ -1,12 +1,11 @@
 <?php
 
-	// Add connection to database
-	include('config/db_connect.php');
+	include('config/dbConnect.php');
 
 	// Same as add form:
-	$name = $email = $grade = $hours = $number = $password = $password_reenter = $auth_level = '';
-	$errors = array('name' => '', 'email' => '', 'grade' => '', 'hours' => '', 'number' => '', 'password' => '', 'password_reenter' => '', 'auth_level' => '');
-	$updated = array('name' => false, 'email' => false, 'grade' => false, 'hours' => false, 'number' => false, 'password' => false, 'auth_level' => false);
+	$name = $email = $grade = $hours = $number = $password = $passwordReenter = $authLevel = '';
+	$errors = array('name' => '', 'email' => '', 'grade' => '', 'hours' => '', 'number' => '', 'password' => '', 'passwordReenter' => '', 'authLevel' => '');
+	$updated = array('name' => false, 'email' => false, 'grade' => false, 'hours' => false, 'number' => false, 'password' => false, 'authLevel' => false);
 
   // Check GET request id param
 	if(isset($_GET['id'])) {
@@ -72,21 +71,19 @@
 				$errors['password'] = 'Password must be at least 8 characters long and alphanumeric';
 			}
 
-			$_POST['password_reenter'] = trim($_POST['password_reenter']);
-			if(empty($_POST['password_reenter'])) {
+			$_POST['passwordReenter'] = trim($_POST['passwordReenter']);
+			if(empty($_POST['passwordReenter'])) {
 				if(isset($password)) {
-					$errors['password_reenter'] = 'You must re-enter your new password';
+					$errors['passwordReenter'] = 'You must re-enter your new password';
 				}
 			} else {
-				$password_reenter = $_POST['password_reenter'];
-				if($password_reenter !== $password) {
-					$errors['password_reenter'] = 'The passwords you entered must match';
+				$passwordReenter = $_POST['passwordReenter'];
+				if($passwordReenter !== $password) {
+					$errors['passwordReenter'] = 'The passwords you entered must match';
 				}
 			}
 			$updated['password'] = true;
 		}
-
-
 
 		if(empty($_POST['grade'])) {
 			$grade = $member['grade'];
@@ -118,11 +115,11 @@
 			$updated['number'] = true;
 		}
 
-		if(empty($_POST['auth_level'])) {
-			$auth_level = $member['auth_level'];
+		if(empty($_POST['authLevel'])) {
+			$authLevel = $member['auth_level'];
 		} else {
-			$auth_level = $_POST['auth_level'];
-			$updated['auth_level'] = true;
+			$authLevel = $_POST['authLevel'];
+			$updated['authLevel'] = true;
 		}
 
 		if(!array_filter($errors)) {
@@ -135,29 +132,29 @@
 			$grade = mysqli_real_escape_string($conn, $grade);
 			$hours = mysqli_real_escape_string($conn, $hours);
 			$number = mysqli_real_escape_string($conn, $number);
-			$auth_level = mysqli_real_escape_string($conn, $auth_level);
+			$authLevel = mysqli_real_escape_string($conn, $authLevel);
 
 			if(isset($password)) {
 				// Add the number of hours inputted to total hours
-				$sql = "UPDATE member_data SET name='$name', email='$email', grade='$grade', hours=hours+'$hours', number='$number', auth_level='$auth_level', password='$hashedPassword' WHERE id='$id';";
+				$sql = "UPDATE member_data SET name='$name', email='$email', grade='$grade', hours=hours+'$hours', number='$number', auth_level='$authLevel', password='$hashedPassword' WHERE id='$id';";
 			} else {
-				$sql = "UPDATE member_data SET name='$name', email='$email', grade='$grade', hours=hours+'$hours', number='$number', auth_level='$auth_level' WHERE id='$id';";
+				$sql = "UPDATE member_data SET name='$name', email='$email', grade='$grade', hours=hours+'$hours', number='$number', auth_level='$authLevel' WHERE id='$id';";
 			}
 
 			if(mysqli_query($conn, $sql)) {
 				// Writing a log to the updateMember file that member info has been updated
-				$updated_fields = '';
+				$updatedFields = '';
 				foreach($updated as $key => $value) {
 					if($updated[$key] === true) {
 						$newVal = $_POST[$key];
-						$updated_fields = $updated_fields . $key . "($newVal) ";
+						$updatedFields = $updatedFields . $key . "($newVal) ";
 					}
 				}
 
 				date_default_timezone_set('America/Los_Angeles');
 				$file = 'logs/updateMember.txt';
 				$handle = fopen($file, 'a+');
-				fwrite($handle, date("h:i:sa") . " PST: " . "The values -- $updated_fields" . "-- have been updated for " . ucfirst($auth_level) . " " . $name . ".\n");
+				fwrite($handle, date("h:i:sa") . " PST: " . "The values -- $updatedFields" . "-- have been updated for " . ucfirst($authLevel) . " " . $name . ".\n");
 				fclose($handle);
 
         mysqli_free_result($result);
@@ -190,121 +187,62 @@
 	<?php if(isset($member)): ?>
 		<h4 class="center">Edit Data for <?php echo $member['name']; ?></h4>
 		<form class="white" action="<?php echo $_SERVER['PHP_SELF']; ?>?id=<?php echo $member['id'] ?>" method="POST" autocomplete="off">
-			<?php if($session_auth_level === 'advisor'): ?>
+
+			<?php include('includes/updateChoices.php'); ?>
+
+			<?php if($sessionAuthLevel === 'advisor'): ?>
 
 				<?php if($member['auth_level'] !== 'advisor'): ?>
-					<label>Member Name</label>
-					<input type="text" name="name" value="<?php echo htmlspecialchars($name); ?>">
-					<div class="red-text"><?php echo $errors['name']; ?></div>
-					<label>Member Email</label>
-					<input type="text" name="email">
-					<div class="red-text"><?php echo $errors['email']; ?></div>
-					<label>Member Password</label>
-					<input type="password" name="password" placeholder="New Password">
-					<div class="red-text"><?php echo $errors['password']; ?></div>
-					<input type="password" name="password_reenter" placeholder="Re-enter New Password">
-					<div class="red-text"><?php echo $errors['password_reenter']; ?></div>
-					<label>Member Grade</label>
-					<input type="number" name="grade" min="9" max="12">
-					<div class="red-text"><?php echo $errors['grade']; ?></div>
-					<label style="font-size: 15px;"><b>Add Hours</b></label>
-					<input type="number" name="hours">
-					<div class="red-text"><?php echo $errors['hours']; ?></div>
-					<label>Member Student ID Number</label>
-					<input type="text" name="number" maxlength="6">
-					<div class="red-text"><?php echo $errors['number']; ?></div>
-					<label>Member Authorization Level</label>
-					<div class="input-field col s12">
-						<select name="auth_level">
-					    <option value="" disabled selected>Choose your option</option>
-					    <option value="member">Member</option>
-					    <option value="admin">Admin</option>
-					  </select>
-				 	</div>
-					<div class="red-text"><?php echo $errors['auth_level']; ?></div>
+
+					<?php
+						EchoUpdateField::echoName($name, $errors['name']);
+						EchoUpdateField::echoEmail($errors['email']);
+						EchoUpdateField::echoPassword($errors['password'], $errors['passwordReenter']);
+						EchoUpdateField::echoGrade($errors['grade']);
+						EchoUpdateField::echoHours($errors['hours']);
+						EchoUpdateField::echoIdNumber($errors['number']);
+						EchoUpdateField::echoAuthLevel($errors['authLevel']);
+					?>
+
 				<?php endif; ?>
 
 				<?php if($member['auth_level'] === 'advisor'): ?>
-					<label>Member Name</label>
-					<input type="text" name="name" value="<?php echo htmlspecialchars($name); ?>">
-					<div class="red-text"><?php echo $errors['name']; ?></div>
-					<label>Member Email</label>
-					<input type="text" name="email">
-					<div class="red-text"><?php echo $errors['email']; ?></div>
-					<label>Member Password</label>
-					<input type="password" name="password" placeholder="New Password">
-					<div class="red-text"><?php echo $errors['password']; ?></div>
-					<input type="password" name="password_reenter" placeholder="Re-enter New Password">
-					<div class="red-text"><?php echo $errors['password_reenter']; ?></div>
+					<?php
+						EchoUpdateField::echoName($name, $errors['name']);
+						EchoUpdateField::echoEmail($errors['email']);
+						EchoUpdateField::echoPassword($errors['password'], $errors['passwordReenter']);
+					 ?>
 				<?php endif; ?>
 
-			<?php elseif($session_auth_level === 'admin'): ?>
+			<?php elseif($sessionAuthLevel === 'admin'): ?>
 				<?php if($member['auth_level'] === 'member'): ?>
-					<label>Member Name</label>
-					<input type="text" name="name" value="<?php echo htmlspecialchars($name); ?>">
-					<div class="red-text"><?php echo $errors['name']; ?></div>
-					<label>Member Email</label>
-					<input type="text" name="email">
-					<div class="red-text"><?php echo $errors['email']; ?></div>
-					<label>Member Password</label>
-					<input type="password" name="password" placeholder="New Password">
-					<div class="red-text"><?php echo $errors['password']; ?></div>
-					<input type="password" name="password_reenter" placeholder="Re-enter New Password">
-					<div class="red-text"><?php echo $errors['password_reenter']; ?></div>
-					<label>Member Grade</label>
-					<input type="number" name="grade" min="9" max="12">
-					<div class="red-text"><?php echo $errors['grade']; ?></div>
-					<label style="font-size: 15px;"><b>Add Hours</b></label>
-					<input type="number" name="hours">
-					<div class="red-text"><?php echo $errors['hours']; ?></div>
-					<label>Member Student ID Number</label>
-					<input type="text" name="number" maxlength="6">
-					<div class="red-text"><?php echo $errors['number']; ?></div>
-					<label>Member Authorization Level</label>
-					<div class="input-field col s12">
-						<select name="auth_level">
-					    <option value="" disabled selected>Choose your option</option>
-					    <option value="member">Member</option>
-					    <option value="admin">Admin</option>
-					  </select>
-				 	</div>
-					<div class="red-text"><?php echo $errors['auth_level']; ?></div>
-				<?php elseif($member['id'] == $user_session_id): ?>
-					<label>Member Name</label>
-					<input type="text" name="name" value="<?php echo htmlspecialchars($name); ?>">
-					<div class="red-text"><?php echo $errors['name']; ?></div>
-					<label>Member Email</label>
-					<input type="text" name="email">
-					<div class="red-text"><?php echo $errors['email']; ?></div>
-					<label>Member Password</label>
-					<input type="password" name="password" placeholder="New Password">
-					<div class="red-text"><?php echo $errors['password']; ?></div>
-					<input type="password" name="password_reenter" placeholder="Re-enter New Password">
-					<div class="red-text"><?php echo $errors['password_reenter']; ?></div>
-					<label>Member Grade</label>
-					<input type="number" name="grade" min="9" max="12">
-					<div class="red-text"><?php echo $errors['grade']; ?></div>
-					<label style="font-size: 15px;"><b>Add Hours</b></label>
-					<input type="number" name="hours">
-					<div class="red-text"><?php echo $errors['hours']; ?></div>
-					<label>Member Student ID Number</label>
-					<input type="text" name="number" maxlength="6">
-					<div class="red-text"><?php echo $errors['number']; ?></div>
+					<?php
+						EchoUpdateField::echoName($name, $errors['name']);
+						EchoUpdateField::echoEmail($errors['email']);
+						EchoUpdateField::echoPassword($errors['password'], $errors['passwordReenter']);
+						EchoUpdateField::echoGrade($errors['grade']);
+						EchoUpdateField::echoHours($errors['hours']);
+						EchoUpdateField::echoIdNumber($errors['number']);
+						EchoUpdateField::echoAuthLevel($errors['authLevel']);
+					?>
+				<?php elseif($member['id'] == $userSessionId): ?>
+					<?php
+						EchoUpdateField::echoName($name, $errors['name']);
+						EchoUpdateField::echoEmail($errors['email']);
+						EchoUpdateField::echoPassword($errors['password'], $errors['passwordReenter']);
+						EchoUpdateField::echoGrade($errors['grade']);
+						EchoUpdateField::echoHours($errors['hours']);
+						EchoUpdateField::echoIdNumber($errors['number']);
+					?>
 				<?php endif; ?>
 
-			<?php elseif($session_auth_level === 'member'): ?>
-				<?php if($member['id'] == $user_session_id): ?>
-					<label>Member Name</label>
-					<input type="text" name="name" value="<?php echo htmlspecialchars($name); ?>">
-					<div class="red-text"><?php echo $errors['name']; ?></div>
-					<label>Member Email</label>
-					<input type="text" name="email">
-					<div class="red-text"><?php echo $errors['email']; ?></div>
-					<label>Member Password</label>
-					<input type="password" name="password" placeholder="New Password">
-					<div class="red-text"><?php echo $errors['password']; ?></div>
-					<input type="password" name="password_reenter" placeholder="Re-enter New Password">
-					<div class="red-text"><?php echo $errors['password_reenter']; ?></div>
+			<?php elseif($sessionAuthLevel === 'member'): ?>
+				<?php if($member['id'] == $userSessionId): ?>
+					<?php
+						EchoUpdateField::echoName($name, $errors['name']);
+						EchoUpdateField::echoEmail($errors['email']);
+						EchoUpdateField::echoPassword($errors['password'], $errors['passwordReenter']);
+					?>
 				<?php endif; ?>
 
 			<?php endif; ?>

@@ -2,10 +2,10 @@
 
   session_start();
 
-  $login_status = $_SESSION['login_status'] ?? false;
-  $user_session_id = $_SESSION['id'] ?? '-1';
-  $session_auth_level = $_SESSION['auth_level'] ?? 'member';
-  $user_session_name = $_SESSION['name'] ?? 'Guest';
+  $loginStatus = $_SESSION['loginStatus'] ?? false;
+  $userSessionId = $_SESSION['id'] ?? '-1';
+  $sessionAuthLevel = $_SESSION['authLevel'] ?? 'member';
+  $userSessionName = $_SESSION['name'] ?? 'Guest';
 
  ?>
 
@@ -44,16 +44,16 @@
           <ul id="dropdown" class="dropdown-content">
             <li><a class="brand-text" href="index.php">Home</a></li>
             <li><a class="brand-text" href="help.php">Help</a></li>
-            <?php if($session_auth_level === 'admin' || $session_auth_level === 'advisor'): ?>
+            <?php if($sessionAuthLevel === 'admin' || $sessionAuthLevel === 'advisor'): ?>
               <li><a class="brand-text" href="addMember.php">Add Member</a></li>
             <?php endif; ?>
-            <?php if($session_auth_level === 'advisor'): ?>
+            <?php if($sessionAuthLevel === 'advisor'): ?>
               <li><a class="brand-text" href="addAdvisor.php">Add an Advisor</a></li>
             <?php endif; ?>
-            <li id="login-status-drop" class="grey-text"><?php echo $user_session_name; ?></li>
-            <?php if(!$login_status): ?>
+            <li id="login-status-drop" class="grey-text"><?php echo $userSessionName; ?></li>
+            <?php if(!$loginStatus): ?>
               <li><a class="brand-text" href="login.php">Login</a></li>
-            <?php elseif($login_status): ?>
+            <?php elseif($loginStatus): ?>
               <li class="divider"></li>
               <li><a class="brand-text" href="includes/logout.inc.php">Logout</a></li>
             <?php endif; ?>
@@ -66,16 +66,16 @@
           <ul id="dropdown" class="dropdown-content">
             <li><a class="brand-text" href="index.php">Home</a></li>
             <li><a class="brand-text" href="help.php">Help</a></li>
-            <?php if($session_auth_level === 'admin' || $session_auth_level === 'advisor'): ?>
+            <?php if($sessionAuthLevel === 'admin' || $sessionAuthLevel === 'advisor'): ?>
               <li><a class="brand-text" href="addMember.php">Add Member</a></li>
             <?php endif; ?>
-            <?php if($session_auth_level === 'advisor'): ?>
+            <?php if($sessionAuthLevel === 'advisor'): ?>
               <li><a class="brand-text" href="addAdvisor.php">Add an Advisor</a></li>
             <?php endif; ?>
-            <li id="login-status-drop" class="grey-text"><?php echo $user_session_name; ?></li>
-            <?php if(!$login_status): ?>
+            <li id="login-status-drop" class="grey-text"><?php echo $userSessionName; ?></li>
+            <?php if(!$loginStatus): ?>
               <li><a class="brand-text" href="login.php">Login</a></li>
-            <?php elseif($login_status): ?>
+            <?php elseif($loginStatus): ?>
               <li class="divider"></li>
               <li><a class="brand-text" href="includes/logout.inc.php">Logout</a></li>
             <?php endif; ?>
@@ -88,16 +88,16 @@
       <!-- Create the navbar buttons -->
       <ul id="nav-mobile" class="right hide-small-and-down vertical-align bar">
         <li><a href="help.php" class="btn-large brand z-depth-0">Help</a></li>
-        <?php if($session_auth_level === 'admin' || $session_auth_level === 'advisor'): ?>
+        <?php if($sessionAuthLevel === 'admin' || $sessionAuthLevel === 'advisor'): ?>
           <li><a href="addMember.php" class="btn-large brand z-depth-0">Add a Member</a></li>
         <?php endif; ?>
-        <?php if($session_auth_level === 'advisor'): ?>
+        <?php if($sessionAuthLevel === 'advisor'): ?>
           <li><a href="addAdvisor.php" class="btn-large brand z-depth-0">Add an Advisor</a></li>
         <?php endif; ?>
-        <li id="login-status-nav" class="grey-text"><?php echo $user_session_name; ?></li>
-        <?php if(!$login_status): ?>
+        <li id="login-status-nav" class="grey-text"><?php echo $userSessionName; ?></li>
+        <?php if(!$loginStatus): ?>
           <li><a href="login.php" class="btn-large brand z-depth-0">Login</a></li
-        <?php elseif($login_status): ?>
+        <?php elseif($loginStatus): ?>
           <li><a href="includes/logout.inc.php" class="btn-large brand z-depth-0">Logout</a></li>
         <?php endif; ?>
       </ul>
