@@ -29,7 +29,7 @@ but the setup process is different.
 
 Installation:
 
-Follow this video guide to learn how to install the web application on your local Window 10 PC: xxxxxxxxxx
+Follow this video guide to learn how to install the web application on your local Window 10 PC: https://www.youtube.com/watch?v=8BL_-EQWHBo&feature=youtu.be
 Video demonstration of program: https://www.youtube.com/watch?v=rpkswAOjRAo&t=2s
 
 Program Citation:
