@@ -22,6 +22,7 @@
 		$member = mysqli_fetch_assoc($result);
 	}
 
+	// Validating the form data if the user hit the submit button
   if(isset($_POST['submit'])) {
     if(empty($_POST['name'])) {
       $name = $member['name'];
@@ -134,6 +135,7 @@
 			$number = mysqli_real_escape_string($conn, $number);
 			$authLevel = mysqli_real_escape_string($conn, $authLevel);
 
+			// Updates the user data if there are no errors
 			if(isset($password)) {
 				// Add the number of hours inputted to total hours
 				$sql = "UPDATE member_data SET name='$name', email='$email', grade='$grade', hours=hours+'$hours', number='$number', auth_level='$authLevel', password='$hashedPassword' WHERE id='$id';";
@@ -183,10 +185,14 @@
 	});
 </script>
 
+<!-- Update form -->
 <section class="container grey-text content">
 	<?php if(isset($member)): ?>
 		<h4 class="center">Edit Data for <?php echo $member['name']; ?></h4>
 		<form class="white" action="<?php echo $_SERVER['PHP_SELF']; ?>?id=<?php echo $member['id'] ?>" method="POST" autocomplete="off">
+
+			<!-- Shows different fields that the user is allowed to update based on their authorization level and the authorization level of the
+				person they are trying to update -->
 
 			<?php include('includes/updateChoices.php'); ?>
 
@@ -270,6 +276,7 @@
 					</div>
 				</label>
 			</form>
+	<!-- Displays an error if no user exists with the given id -->
 	<?php else: ?>
 		<h5 class="center">No such member exists</h5>
 	<?php endif; ?>

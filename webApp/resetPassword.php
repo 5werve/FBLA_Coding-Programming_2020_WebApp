@@ -1,19 +1,23 @@
 <?php
 
+  // Connect to database
   include('config/dbConnect.php');
-
+  // Initialize PHPMailer object
   include('config/emailObjectInit.php');
 
   $errorEmail = '';
 
+  // Send the recovery email after validating that the email is registered in the database
   if(isset($_POST['reset-password-submit'])) {
 
+    // Setting the email to the form values
     $userEmail = $_POST['email'];
     $userEmail = mysqli_real_escape_string($conn, $userEmail);
 
     if(empty($userEmail)) {
       $errorEmail = 'Email field cannot be left empty';
     } else {
+      // Queries the database and checks if the entered email is registered in the database
       $sql = 'SELECT email FROM member_data WHERE email = ?;';
       $stmt = mysqli_stmt_init($conn);
 
@@ -39,6 +43,7 @@
           // Setting the expiration of the tokens to 30 minutes
           $expires = date('U') + 900;
 
+          // Deleting previously set tokens for a user
           $sql = "DELETE FROM password_reset WHERE password_reset_email = ?;";
           // Initiating connection to db
           $stmt = mysqli_stmt_init($conn);
@@ -67,17 +72,22 @@
           mysqli_stmt_close($stmt);
           mysqli_close($conn);
 
+          // Sending the user the recovery email
           $to = $userEmail;
-          $subject = 'Reset your passoword for CHS FBLA member database app';
+          $subject = 'Reset your password for CHS FBLA member database app';
           $body = "
-            <p>
-              We received a password reset request. The link to reset your password is below.
-              If you did not make this request, you can ignore this email.
-            </p>
-            <p>
-              Here is your password reset link: <br />
-              <a href='$url'>$url</a>
-            </p>
+            <body style='background-color: #F5F5F5'>
+              <h1 style='color: #ad2d2d; font-family: 'Verdana, Geneva, sans-serif''>CHS FBLA Password Reset:</h1>
+              <p style='color: black; font-size: 14px; font-family: 'Verdana, Geneva, sans-serif''>
+                We received a password reset request. The link to reset your password is below.
+                If you did not make this request, you can ignore this email.
+              </p>
+              <hr />
+              <p style='color: #2d5fad; font-size: 18px; font-family: 'Verdana, Geneva, sans-serif''>
+                Here is your password reset link: <br /><br />
+                <a style='color: #2d5fad; font-family: 'Verdana, Geneva, sans-serif'' href='$url'>$url</a>
+              </p>
+            </body>
           ";
 
           $mail->Subject = $subject;

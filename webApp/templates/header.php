@@ -1,7 +1,9 @@
 <?php
 
+  // Creating a sesson for the user when they visit the website
   session_start();
 
+  // Creating session varibales to personalize user experience
   $loginStatus = $_SESSION['loginStatus'] ?? false;
   $userSessionId = $_SESSION['id'] ?? '-1';
   $sessionAuthLevel = $_SESSION['authLevel'] ?? 'member';
@@ -26,20 +28,23 @@
   </head>
   <body id="body" class="grey lighten-4">
     <nav id="nav" class="white z-depth-2">
-      <!-- Create home button -->
+      <!-- Creates the navbar -->
       <div class="wrapper">
+        <!-- Creates the logo image which acts as a home button -->
         <div>
           <a href="index.php" class="left logo-link1">
           <img src="images/fbla.webp" alt="Centennial FBLA Logo" id="logo-img">
           </a>
         </div>
 
+        <!-- Creates logo text which acts as the home button when the window gets smaller -->
         <div>
           <a href="index.php" class="left logo-link2">
           <h4 id="logo-text">CHS FBLA</h4>
           </a>
         </div>
 
+        <!-- Creates the regular dropdown menu when the window is large enough but too small for the regular navbar buttons -->
         <div>
           <ul id="dropdown" class="dropdown-content">
             <li><a class="brand-text" href="index.php">Home</a></li>
@@ -62,6 +67,7 @@
           <a id="adrop" class="btn-large brand dropdown-button z-depth-0 adaptive-drop" href="#" data-activates="dropdown">Menu<i class="material-icons right">arrow_drop_down</i></a>
         </div>
 
+        <!-- Combines the logo text and the dropdown into one button when the window is too small -->
         <div>
           <ul id="dropdown" class="dropdown-content">
             <li><a class="brand-text" href="index.php">Home</a></li>
@@ -85,7 +91,7 @@
         </div>
       </div>
 
-      <!-- Create the navbar buttons -->
+      <!-- Create the navbar buttons when the window is sufficiently large -->
       <ul id="nav-mobile" class="right hide-small-and-down vertical-align bar">
         <li><a href="help.php" class="btn-large brand z-depth-0">Help</a></li>
         <?php if($sessionAuthLevel === 'admin' || $sessionAuthLevel === 'advisor'): ?>

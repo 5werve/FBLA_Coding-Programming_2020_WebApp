@@ -53,6 +53,7 @@
                 <?php endif; ?>"
                 width=100px height = 150px style="object-fit:cover;;"
               />
+              <!-- Displays different information for advisors and non-advisors -->
               <?php if($member['auth_level'] !== 'advisor'): ?>
                 <ul>
                   <li><?php echo 'Grade: ' . htmlspecialchars($member['grade']); ?></li>

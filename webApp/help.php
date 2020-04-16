@@ -19,6 +19,7 @@
       </ul>
     </div>
 
+    <!-- List of common problems and solutions -->
     <div class="container">
       <div id="login">
         <h5 class="brand-text">How to login</h5>

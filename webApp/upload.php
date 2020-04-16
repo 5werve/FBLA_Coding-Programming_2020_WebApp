@@ -27,6 +27,8 @@
       $uploadOk = 0;
   }
 
+  // Begin cited code:
+  // https://www.w3schools.com/php/php_file_upload.asp
   // Setting the file name and type
   $targetFile = $targetDir . basename($_FILES["fileToUpload"]["name"]);
   $imageFileType = strtolower(pathinfo($targetFile,PATHINFO_EXTENSION));
@@ -75,6 +77,7 @@
         $uploadResult = "There was an error uploading your file";
       }
   }
+  // End cited code
 
 ?>
 

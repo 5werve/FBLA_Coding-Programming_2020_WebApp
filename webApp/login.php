@@ -1,15 +1,19 @@
 <?php
 
+  // Connect to database
   include('config/dbConnect.php');
 
+  // Setting default values for the email and password along with their erros
   $email = $password = '';
   $errors = array('email' => '', 'password' => '');
 
   if(isset($_POST['login-submit'])) {
 
+    // Setting the email and password to the form values
     $email = trim($_POST['email']);
     $password = trim($_POST['password']);
 
+    // Checks if the email is registered to a user in the database
     if(empty($email)) {
       $errors['email'] = 'An email is required';
     } else {
@@ -57,6 +61,7 @@
 
 <?php include('templates/header.php'); ?>
 
+<!-- Login form -->
 <section class="container grey-text content">
   <h4 class="center grey-text">Login</h4>
   <form class="white" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">

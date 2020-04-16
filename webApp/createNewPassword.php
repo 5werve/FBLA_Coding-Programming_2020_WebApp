@@ -1,25 +1,32 @@
 <?php
 
+  // Connect to database
   include('config/dbConnect.php');
 
+  // Setting default values for the input values and their errors
   $password = $passwordReenter = $selector = $validator = '';
   $errors = array('password' => '', 'passwordReenter' => '', 'selector' => '', 'validator' => '');
 
+  // Validating new password when the user hits the submit button
   if(isset($_POST['submit'])) {
 
+    // Setting the selector and validator
     $selector = $_POST['selector'];
     $validator = $_POST['validator'];
 
+    // Validating the password and the re-entered password
     $_POST['password'] = trim($_POST['password']);
 		if(empty($_POST['password'])) {
 			$errors['password'] = 'An password is required';
 		} else {
 			$password = $_POST['password'];
+      // Password has to be at least 8 characters long and alphanumeric
 			if(!preg_match('/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/', $password)) {
 				$errors['password'] = 'Password must be at least 8 characters long and alphanumeric';
 			}
 		}
 
+    // Re-entered password has to match the entered password
 		$_POST['passwordReenter'] = trim($_POST['passwordReenter']);
 		if(empty($_POST['passwordReenter'])) {
 			$errors['passwordReenter'] = 'You must re-enter your password';
@@ -30,6 +37,7 @@
 			}
 		}
 
+    // Checking to see if the selector has expired
     $currentDate = date('U');
 
     $sql = "SELECT * FROM password_reset WHERE password_reset_selector = ? AND password_reset_expires >= ?;";
@@ -102,6 +110,7 @@
       				fwrite($handle, date("h:i:sa") . " PST: " . $tokenEmail . " has updated their passoword." . "\n");
       				fclose($handle);
 
+              // Redirects the user to the reset password page with a success message if the password is successfully updated
               header('Location: resetPassword.php?newpwd=passwordupdated');
             }
           }
@@ -109,6 +118,7 @@
         }
       }
     } else {
+      // Refreshes the page with error messages if there are any
       $redirectError = 'http://localhost/FBLA_Coding-Programming_2020_WebApp-optimize_041220/webApp/createNewPassword.php?selector=' . $selector . '&validator=' . $validator . '&pwderr=' . $errors['password'] . '&pwdreerr=' . $errors['passwordReenter'] . '&selerr=' . $errors['selector'] . '&valerr=' . $errors['validator'];
       header("Location: $redirectError");
     }
@@ -144,6 +154,7 @@
         }
         ?>
 
+        <!-- Form for resetting the password -->
         <form class="white" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
           <input type="hidden" name="selector" value="<?php echo $selector; ?>">
           <div class="red-text"><?php echo $selectorError ?? ''; ?></div>

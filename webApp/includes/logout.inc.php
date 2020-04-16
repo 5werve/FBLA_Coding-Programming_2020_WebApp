@@ -5,6 +5,7 @@
   session_unset();
   session_destroy();
 
+  // Redirecting the user
   header('Location: ../index.php');
 
  ?>

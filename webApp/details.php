@@ -1,5 +1,6 @@
 <?php
 
+	// Connect to database
 	include('config/dbConnect.php');
 
 	// Check GET request id param

@@ -1,7 +1,9 @@
 <?php
 
+  // Echoes certain input fields to the update form
   class EchoUpdateField {
 
+    // Echoes the name field with errors if there are any
     public static function echoName($name, $nameError) {
       echo '
         <label>Member Name</label>
@@ -10,6 +12,7 @@
       ';
     }
 
+    // Echoes the email field with errors if there are any
     public static function echoEmail($emailError) {
       echo '
         <label>Member Email</label>
@@ -18,6 +21,7 @@
       ';
     }
 
+    // Echoes the password fields with errors if there are any
     public static function echoPassword($pwdError, $pwdReError) {
       echo '
         <label>Member Password</label>
@@ -28,6 +32,7 @@
       ';
     }
 
+    // Echoes the grade field with errors if there are any
     public static function echoGrade($gradeError) {
       echo '
         <label>Member Grade</label>
@@ -36,6 +41,7 @@
       ';
     }
 
+    // Echoes the hours field with errors if there are any
     public static function echoHours($hoursError) {
       echo '
         <label style="font-size: 15px;"><b>Add Hours</b></label>
@@ -44,6 +50,7 @@
       ';
     }
 
+    // Echoes the id number field with errors if there are any
     public static function echoIdNumber($numberError) {
       echo '
         <label>Member Student ID Number</label>
@@ -52,6 +59,7 @@
       ';
     }
 
+    // Echoes the authorization level field with errors if there are any
     public static function echoAuthLevel($authLevelError) {
       echo '
         <label>Member Authorization Level</label>

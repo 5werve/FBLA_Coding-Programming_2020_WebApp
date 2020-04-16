@@ -1,5 +1,6 @@
 <?php
 
+  // Setting login values
   $serverName = 'localhost';
   $dbUsername = 'matthew';
   $dbPassword = 'Minhhongan';

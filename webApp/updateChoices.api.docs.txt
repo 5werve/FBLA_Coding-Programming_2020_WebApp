@@ -1,0 +1,110 @@
+EchoUpdateField Documentation
+
+This is documentation for the EchoUpdateField class which uses static functions to return form fields along with default values and errors.
+
+---------------------------------------------------------------------------------------------------
+
+echoName function
+
+public static function echoName($name, $nameError)
+
+Description:
+Echoes the name field in the update form along with any values the user already entered and any errors in validation
+
+Parameters:
+$name The value for name that the user entered in the previous failed form submission
+$nameError The error that was encountered while trying to validate the name
+
+What the function returns:
+The function only echoes the input field. It does not return anything
+
+---------------------------------------------------------------------------------------------------
+
+echoEmail function
+
+public static function echoEmail($emailError)
+
+Description:
+Echoes any error the user may have encountered while attempting to validate the new email
+
+Parameters:
+$emailError The error that was encountered while trying to validate the email
+
+What the function returns:
+The function only echoes the input field. It does not return anything
+
+---------------------------------------------------------------------------------------------------
+
+echoPassword function
+
+public static function echoPassword($pwdError, $pwdReError)
+
+Description:
+Echoes any errors the user may have encountered while attempting to validate the new password
+
+Parameters:
+$pwdError The error that was encountered while trying to validate the password
+$pwdReError The error that was encountered while trying to validate the re-entered password
+
+What the function returns:
+The function only echoes the input field. It does not return anything
+
+---------------------------------------------------------------------------------------------------
+
+echoGrade function
+
+public static function echoGrade($gradeError)
+
+Description:
+Echoes any errors the user may have encountered while attempting to validate the new grade
+
+Parameters:
+$gradeError The error that was encountered while trying to validate the grade
+
+What the function returns:
+The function only echoes the input field. It does not return anything
+
+---------------------------------------------------------------------------------------------------
+
+echoHours function
+
+public static function echoHours($hoursError)
+
+Description:
+Echoes any errors the user may have encountered while attempting to validate the new hours value
+
+Parameters:
+$hoursError The error that was encountered while trying to validate the hours value
+
+What the function returns:
+The function only echoes the input field. It does not return anything
+
+---------------------------------------------------------------------------------------------------
+
+echoIdNumber function
+
+public static function echoIdNumber($numberError)
+
+Description:
+Echoes any errors the user may have encountered while attempting to validate the new id number
+
+Parameters:
+$numberError The error that was encountered while trying to validate the id number
+
+What the function returns:
+The function only echoes the input field. It does not return anything
+
+-------------------------------------------------------------------------------------------------
+
+echoAuthLevel function
+
+public static function echoAuthLevel($authLevelError)
+
+Description:
+Echoes any errors the user may have encountered while attempting to validate the new authorization level
+
+Parameters:
+$authLevelError The error that was encountered while trying to validate the authorization level
+
+What the function returns:
+The function only echoes the input field. It does not return anything
