@@ -194,7 +194,7 @@
 			<!-- Shows different fields that the user is allowed to update based on their authorization level and the authorization level of the
 				person they are trying to update -->
 
-			<?php include('includes/updateChoices.php'); ?>
+			<?php include('includes/updateChoices.inc.php'); ?>
 
 			<?php if($sessionAuthLevel === 'advisor'): ?>
 
