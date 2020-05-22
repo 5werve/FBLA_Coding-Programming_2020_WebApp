@@ -127,7 +127,7 @@
       $name = mysqli_real_escape_string($conn, $_POST['name']);
       $email = mysqli_real_escape_string($conn, $_POST['email']);
 
-      // Hashing the passwork for security with bcrypt (most secure, always updated after every breach)
+      // Hashing the password for security with bcrypt (most secure, always updated after every breach)
       $password = mysqli_real_escape_string($conn, $_POST['password']);
       $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
