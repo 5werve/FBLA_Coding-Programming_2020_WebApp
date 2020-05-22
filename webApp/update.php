@@ -221,7 +221,7 @@
 				<?php endif; ?>
 
 			<?php elseif($sessionAuthLevel === 'admin'): ?>
-				<?php if($member['auth_level'] === 'member'): ?>
+				<?php if($member['auth_level'] === 'member' || $member['auth_level'] === 'admin'): ?>
 					<?php
 						EchoUpdateField::echoName($name, $errors['name']);
 						EchoUpdateField::echoEmail($errors['email']);

@@ -52,6 +52,34 @@ Date: 3/8/20
 Code version: 7.4.3
 Availability: https://www.apachefriends.org/download.html
 
+---------------------------------------------------------------------------------------------------------------------
+
+Code in addAdvisor.php, addMember.php, details.php, and index.php was inspired by this source:
+
+Title: PHP Tutorial for Beginners
+Author: The Net Ninja
+Date: 3/14/19
+Code version: 1.0.0
+Availability: https://www.youtube.com/playlist?list=PL4cUxeGkcC9gksOX3Kd9KPo-O68ncT05o
+
+---------------------------------------------------------------------------------------------------------------------
+
+Code in createNewPassword.php, resetPassword.php, logout.php, and login.php was inspired by these sources:
+
+Title: How To Create A Login System In PHP For Beginners | Procedural MySQLi | 2018 PHP Tutorial | mmtuts
+Author: mmtuts
+Date: 10/10/18
+Code version: 1.0.0
+Availability: https://www.youtube.com/watch?v=LC9GaXkdxF8
+
+Title: How To Create A Forgotten Password System In PHP | Password Recovery By Email In PHP | PHP Tutorial
+Author: mmtuts
+Date: 11/28/18
+Code version: 1.0.0
+Availability: https://www.youtube.com/watch?v=wUkKCMEYj9M
+
+---------------------------------------------------------------------------------------------------------------------
+
 Contact:
 
 Email: vuminhmatthew@gmail.com

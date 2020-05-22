@@ -29,7 +29,7 @@
         mysqli_stmt_store_result($stmt);
 
         $resultCheck = mysqli_stmt_num_rows($stmt);
-        echo $resultCheck;
+        
         if($resultCheck < 1) {
           $errorEmail = 'No such member exists with this email';
         } else {
@@ -82,6 +82,9 @@
                 We received a password reset request. The link to reset your password is below.
                 If you did not make this request, you can ignore this email.
               </p>
+              <b>
+                YOU HAVE 30 MINUTES TO RESET THE EMAIL USING THIS LINK
+              </b>
               <hr />
               <p style='color: #2d5fad; font-size: 18px; font-family: 'Verdana, Geneva, sans-serif''>
                 Here is your password reset link: <br /><br />
