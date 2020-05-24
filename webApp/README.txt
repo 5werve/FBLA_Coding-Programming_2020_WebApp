@@ -1,7 +1,7 @@
 Title: Centennial FBLA Database
 Author: Matthew Vu
 Date: 4/15/2020
-Version: 1.0.2
+Version: 1.0.3
 
 Description:
 

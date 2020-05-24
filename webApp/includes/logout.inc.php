@@ -1,6 +1,6 @@
 <?php
 
-  // Unsetting and destrying sesson variables
+  // Unsetting and destroying session variables
   session_start();
   session_unset();
   session_destroy();
